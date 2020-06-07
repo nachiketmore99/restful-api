@@ -16,7 +16,7 @@ module.exports = async function auth(req, res, next){
 
 
 
-    const token = req.header('auth-token'
+    const token = req.header('auth-token')
     console.log('verifying')
     if(!token) return res.status(401)
 
