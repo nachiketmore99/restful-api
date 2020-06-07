@@ -27,4 +27,4 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
-app.listen(3000, () => console.log('server is running'));
+app.listen(process.env.PORT || 5000, () => console.log('server is running'));
