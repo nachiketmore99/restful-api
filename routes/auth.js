@@ -68,14 +68,12 @@ router.post('/login', async (req, res) => {
 
     // Create & assign Token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
-    console.log(req.body.username, req.body.email, token)
     // await User.updateOne(user, {token: token} )
     
     // res.redirect('http://localhost:8080//?token='+token)
     res.cookie('username', req.body.username)
     res.cookie('email', user.email)
     res.cookie('auth_token', token)
-    res.header('auth-token', token)
     res.redirect('https://app-pair-programming.herokuapp.com/')
 
     // res.header('auth-token', token).redirect('http://localhost:8080/');
