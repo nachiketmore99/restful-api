@@ -15,7 +15,7 @@ router.post('/verify', async (req, res) => {
 })
 
 // Delete
-router.post('/delete',   async (req, res) => {
+router.post('/delete', verify, async (req, res) => {
 
     const { error } = deleteValidation(req.body)
     if (error) return res.status(400).send('error.details[0].message');
@@ -45,7 +45,7 @@ router.post('/delete',   async (req, res) => {
 })
 
 // View Project
-router.post('/project/list',   async (req, res) => {
+router.post('/project/list', verify, async (req, res) => {
 
         Project.find({ username: req.body.username }, function(err, projects) {
                 var projectMap = {};
@@ -53,7 +53,7 @@ router.post('/project/list',   async (req, res) => {
                 projects.forEach(function(project) {
                     projectMap[project._id] = project;
                 });
-            
+                console.log(projectMap)
                 res.send(projectMap);  
             });
         
@@ -61,7 +61,7 @@ router.post('/project/list',   async (req, res) => {
 })
 
 // Create Project
-router.post('/project/create',   async (req, res) => {
+router.post('/project/create', verify, async (req, res) => {
     console.log('creating project')
     
     const { error } = projectValidation(req.body)
@@ -89,7 +89,7 @@ router.post('/project/create',   async (req, res) => {
 })
 
 // View Sessions
-router.post('/session/list',   async (req, res) => {
+router.post('/session/list', verify, async (req, res) => {
 
     Session.find({ username: req.body.username }, function(err, sessions) {
             var sessionMap = {};
@@ -97,13 +97,14 @@ router.post('/session/list',   async (req, res) => {
             sessions.forEach(function(session) {
                 sessionMap[session._id] = session;
             });
+            console.log(sessionMap)
             res.send(sessionMap); 
         });
     
 })
 
 // get session_id
-router.post('/session/sessionid',   async (req, res) => {
+router.post('/session/sessionid', verify, async (req, res) => {
     const session = await Session.findOne( { 
         session_name: req.body.session_name,
         username: req.body.username
@@ -119,7 +120,7 @@ router.post('/session/sessionid',   async (req, res) => {
 })
 
 // Create Session
-router.post('/session/create',   async (req, res) => {
+router.post('/session/create', verify, async (req, res) => {
     console.log('creating session')
     
     const { error } = sessionValidation(req.body)
@@ -150,7 +151,7 @@ router.post('/session/create',   async (req, res) => {
 })
 
 // Deleting all sessions
-router.post('/session/clear',   async (req, res) => {
+router.post('/session/clear', verify, async (req, res) => {
     console.log('deleting session')
     
     try{
@@ -168,7 +169,7 @@ router.post('/session/clear',   async (req, res) => {
 
 
 // View Members
-router.post('/member/list',   async (req, res) => {
+router.post('/member/list', verify, async (req, res) => {
 
     Member.find({ admin: req.body.admin, session_name: req.body.session_name }, function(err, members) {
             var memberMap = {};
@@ -182,7 +183,7 @@ router.post('/member/list',   async (req, res) => {
 })
 
 // View Joined Sessions
-router.post('/session/joined',   async (req, res) => {
+router.post('/session/joined', verify, async (req, res) => {
 
     Member.find({ username: req.body.username }, function(err, session) {
             var sessionMap = {};
@@ -197,7 +198,7 @@ router.post('/session/joined',   async (req, res) => {
 })
 
 // Exit from Sessions
-router.post('/session/exit',   async (req, res) => {
+router.post('/session/exit', verify, async (req, res) => {
 
     console.log('exiting session ', req.body.session_name)
 
@@ -216,7 +217,7 @@ router.post('/session/exit',   async (req, res) => {
 })
 
 // Add Member
-router.post('/member/add',   async (req, res) => {
+router.post('/member/add', verify, async (req, res) => {
     console.log('adding member')
     
     const { error } = memberValidation(req.body)
@@ -254,7 +255,7 @@ router.post('/member/add',   async (req, res) => {
 })
 
 // Remove Member from session
-router.post('/member/remove',   async (req, res) => {
+router.post('/member/remove', verify, async (req, res) => {
     console.log('removing member')
     
     console.log(req.body)
@@ -273,7 +274,7 @@ router.post('/member/remove',   async (req, res) => {
 })
 
 // save code in DB
-router.post('/code/save',   async (req, res) => {
+router.post('/code/save', verify, async (req, res) => {
     console.log(req.body)
     const { error } = codeValidation(req.body)
     if (error) {
@@ -315,7 +316,7 @@ router.post('/code/save',   async (req, res) => {
     
 })
 // get code from DB
-router.post('/code/get',   async (req, res) => {
+router.post('/code/get', verify, async (req, res) => {
 
     const code = await Code.findOne( { 
         project_name: req.body.project_name,
@@ -331,7 +332,7 @@ router.post('/code/get',   async (req, res) => {
     
 })
 
-router.post('/exists',   async (req, res) => {
+router.post('/exists', verify, async (req, res) => {
     try {
         var exists = Member.findOne({ username: req.body.username, session_name: req.body.session_name })
         if(exists){
