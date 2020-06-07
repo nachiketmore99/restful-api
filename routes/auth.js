@@ -68,6 +68,7 @@ router.post('/login', async (req, res) => {
 
     // Create & assign Token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
+    console.log(req.body.username, req.body.email, token)
     // await User.updateOne(user, {token: token} )
     
     // res.redirect('http://localhost:8080//?token='+token)
