@@ -75,7 +75,7 @@ router.post('/login', async (req, res) => {
     res.cookie('email', user.email)
     res.cookie('auth_token', token)
     res.header("Access-Control-Allow-Credentials", 'true');
-    res.header("Access-Control-Allow-Origin", "allowed domains");
+    res.header("Access-Control-Allow-Origin", "*");
     res.redirect('https://app-pair-programming.herokuapp.com/')
 
     // res.header('auth-token', token).redirect('http://localhost:8080/');
