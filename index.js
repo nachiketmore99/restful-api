@@ -12,7 +12,7 @@ const sessionRoute = require('./routes/session');
 require("dotenv").config();
 
 // enable ssl redirect
-// app.use(sslRedirect());
+app.use(sslRedirect());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
