@@ -23,9 +23,9 @@ app.enable('trust proxy'); // optional, not needed for secure cookies
 app.use(session({
     secret : 'somesecret',
     key : 'sid',
+    proxy : true, // add this when behind a reverse proxy, if you need secure cookies
     cookie : {
-        secure : true, // it works without the secure flag (cookie is set)
-        proxy : true,  // tried using this as well, no difference
+        secure : true,
         maxAge: 5184000000 // 2 months
     }
 }));
