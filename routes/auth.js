@@ -71,9 +71,9 @@ router.post('/login', async (req, res) => {
     // await User.updateOne(user, {token: token} )
     
     // res.redirect('http://localhost:8080//?token='+token)
-    res.cookie('username', req.body.username, {secure: true, httpOnly:true})
-    res.cookie('email', user.email, {secure: true, httpOnly:true})
-    res.cookie('auth_token', token, {secure: true, httpOnly:true})
+    res.cookie('username', req.body.username, {secure: true, httpOnly:true, domain:'.herokuapp.com'})
+    res.cookie('email', user.email, {secure: true, httpOnly:true, domain:'.herokuapp.com'})
+    res.cookie('auth_token', token, {secure: true, httpOnly:true, domain:'.herokuapp.com'})
     res.redirect('https://app-pair-programming.herokuapp.com/')
 
     // res.header('auth-token', token).redirect('http://localhost:8080/');
