@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session')
 var cors = require('cors')
-var sslRedirect = require('heroku-ssl-redirect');
+// var sslRedirect = require('heroku-ssl-redirect');
 
 // Import Route
 const authRoute = require('./routes/auth');
