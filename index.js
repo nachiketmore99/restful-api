@@ -20,7 +20,7 @@ app.use(cors());
 app.options("*",cors())
 
 app.enable('trust proxy'); // optional, not needed for secure cookies
-app.use(express.session({
+app.use(session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
