@@ -3,12 +3,16 @@ const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session')
 var cors = require('cors')
+var sslRedirect = require('heroku-ssl-redirect');
 
 // Import Route
 const authRoute = require('./routes/auth');
 const sessionRoute = require('./routes/session');
 
 require("dotenv").config();
+
+// enable ssl redirect
+app.use(sslRedirect());
 
 app.enable('trust proxy');
 app.use(express.json());
