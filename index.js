@@ -22,16 +22,7 @@ app.options("*",cors())
 app.enable('trust proxy'); // optional, not needed for secure cookies
 // var routesArray = ['/login', '/auth', '/signup', '/email', '/chPassW', '/logout', '/snapshot'];
 
-app.use(express.session({
-    secret : 'somesecret',
-    key : 'sid',
-    proxy : true, // add this when behind a reverse proxy, if you need secure cookies
-    cookie : {
-        secure : true,
-        domain:'.herokuapp.com',
-        maxAge: 5184000000 // 2 months
-    }
-}));
+
 
 
 // Connect to DB
@@ -44,5 +35,16 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 // Route Middlewares
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
+
+app.use(express.session({
+    secret : 'somesecret',
+    key : 'sid',
+    proxy : true, // add this when behind a reverse proxy, if you need secure cookies
+    cookie : {
+        secure : true,
+        domain:'.herokuapp.com',
+        maxAge: 5184000000 // 2 months
+    }
+}));
 
 app.listen(process.env.PORT || 5000, () => console.log('server is running'));
