@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://app-pair-programming.herokuapp.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
     res.header("Access-Control-Allow-Credentials", "true")
     next();
   });
@@ -40,7 +40,7 @@ app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
 app.set('trust proxy') // trust first proxy
-app.use(express.session({
+app.use(session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
