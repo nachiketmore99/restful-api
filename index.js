@@ -19,15 +19,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.options("*",cors())
 
+app.enable('trust proxy'); // optional, not needed for secure cookies
+// var routesArray = ['/login', '/auth', '/signup', '/email', '/chPassW', '/logout', '/snapshot'];
 
-var routesArray = ['/user/register', '/user/login'];
-app.use(routesArray, session({
+app.use(express.session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
     cookie : {
         secure : true,
-        httpOnly: true,
+        domain:'.herokuapp.com',
         maxAge: 5184000000 // 2 months
     }
 }));
