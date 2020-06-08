@@ -10,6 +10,7 @@ const sessionRoute = require('./routes/session');
 
 require("dotenv").config();
 
+app.enable('trust proxy');
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
