@@ -12,13 +12,23 @@ const sessionRoute = require('./routes/session');
 require("dotenv").config();
 
 // enable ssl redirect
-app.use(sslRedirect());
+// app.use(sslRedirect());
 
-app.enable('trust proxy');
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 app.options("*",cors())
+
+app.enable('trust proxy'); // optional, not needed for secure cookies
+app.use(session({
+    secret : 'somesecret',
+    key : 'sid',
+    cookie : {
+        secure : true, // it works without the secure flag (cookie is set)
+        proxy : true,  // tried using this as well, no difference
+        maxAge: 5184000000 // 2 months
+    }
+}));
 
 
 // Connect to DB
