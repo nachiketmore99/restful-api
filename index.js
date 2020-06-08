@@ -19,8 +19,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.options("*",cors())
 
-app.enable('trust proxy'); // optional, not needed for secure cookies
-// var routesArray = ['/login', '/auth', '/signup', '/email', '/chPassW', '/logout', '/snapshot'];
 
 
 
@@ -36,7 +34,8 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
-app.use(['/user', '/user/login'], express.session({
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
