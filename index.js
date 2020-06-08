@@ -40,8 +40,7 @@ app.use(session({
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
     cookie : {
-        secure : true,
-        domain:'.herokuapp.com',
+        
         maxAge: 5184000000 // 2 months
     }
 }));
