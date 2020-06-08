@@ -16,8 +16,9 @@ app.use(sslRedirect());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-app.use(cors());
-app.options("*",cors())
+app.use(cors({
+    origin: 'https://login-pair-programming.herokuapp.com/'
+  }));
 
 
 
@@ -34,7 +35,7 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
-app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy') // trust first proxy
 app.use(express.session({
     secret : 'somesecret',
     key : 'sid',
