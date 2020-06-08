@@ -36,7 +36,7 @@ app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
 app.set('trust proxy') // trust first proxy
-app.use(express.session({
+app.use(session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
