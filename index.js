@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.options("*",cors())
 
-app.enable('trust proxy', 1); // optional, not needed for secure cookies
 
 var routesArray = ['/user/register', '/user/login'];
 app.use(routesArray, session({
@@ -28,6 +27,7 @@ app.use(routesArray, session({
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
     cookie : {
         secure : true,
+        httpOnly: true,
         maxAge: 5184000000 // 2 months
     }
 }));
