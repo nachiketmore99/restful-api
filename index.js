@@ -15,12 +15,12 @@ require("dotenv").config();
 app.use(sslRedirect());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded());
 app.use(cors());
 app.options("*",cors())
 
 app.enable('trust proxy'); // optional, not needed for secure cookies
-app.use(session({
+app.use(express.session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
