@@ -71,9 +71,10 @@ router.post('/login', async (req, res) => {
     // await User.updateOne(user, {token: token} )
     
     // res.redirect('http://localhost:8080//?token='+token)
-    res.cookie('username', req.body.username, {httpOnly:false})
-    res.cookie('email', user.email, {httpOnly:false})
-    res.cookie('auth_token', token, {httpOnly:false})
+    res.cookie('username', req.body.username)
+    res.cookie('email', user.email)
+    res.cookie('auth_token', token)
+    res.header("Access-Control-Allow-Origin", "*");
     res.redirect('https://app-pair-programming.herokuapp.com/')
 
     // res.header('auth-token', token).redirect('http://localhost:8080/');
