@@ -12,7 +12,7 @@ const sessionRoute = require('./routes/session');
 require("dotenv").config();
 
 // enable ssl redirect
-app.use(sslRedirect());
+// app.use(sslRedirect());
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -21,12 +21,13 @@ app.options("*",cors())
 
 app.enable('trust proxy'); // optional, not needed for secure cookies
 app.use(express.session({
-    // secret : 'somesecret',
+    secret : 'somesecret',
+    key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
-    // cookie : {
-    //     secure : true,
-    //     maxAge: 5184000000 // 2 months
-    // }
+    cookie : {
+        secure : true,
+        maxAge: 5184000000 // 2 months
+    }
 }));
 
 
