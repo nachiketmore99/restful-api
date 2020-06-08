@@ -36,7 +36,7 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
-app.use(express.session({
+app.use(['/user', '/user/login'], express.session({
     secret : 'somesecret',
     key : 'sid',
     proxy : true, // add this when behind a reverse proxy, if you need secure cookies
