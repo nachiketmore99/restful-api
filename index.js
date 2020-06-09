@@ -11,22 +11,25 @@ const sessionRoute = require('./routes/session');
 
 require("dotenv").config();
 
-// enable ssl redirect
-app.use(sslRedirect());
+// // enable ssl redirect
+// app.use(sslRedirect());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-app.use(function(req, res, next) {
-    var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'https://nachiketmore99.github.io/pair-programming-react' , 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
-    var origin = req.headers.origin;
-    if(allowedOrigins.indexOf(origin) > -1){
-         res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
-    res.header("Access-Control-Allow-Credentials", "true")
-    next();
-  });
+// app.use(function(req, res, next) {
+//     var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'http://localhost:8080/' , 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
+//     var origin = req.headers.origin;
+//     if(allowedOrigins.indexOf(origin) > -1){
+//          res.setHeader('Access-Control-Allow-Origin', origin);
+//     }
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
+//     res.header("Access-Control-Allow-Credentials", "true")
+//     next();
+//   });
+
+app.use(cors())
+app.options('*', cors()) // include before other routes
 
 
 
@@ -43,17 +46,17 @@ mongoose.connect('mongodb+srv://nachi123:nachi123@cluster0-gf1u7.mongodb.net/tes
 app.use('/user', authRoute);
 app.use('/', sessionRoute);
 
-app.use(session({
-    name: "random_session",
-    secret: "yryGGeugidx34otGDuSF5sD9R8g0Gü3r8",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        path: "/",
-        secure: true,
-        //domain: ".herokuapp.com", REMOVE THIS HELPED ME (I dont use a domain anymore)
-        httpOnly: true
-    }
-}));
+// app.use(session({
+//     name: "random_session",
+//     secret: "yryGGeugidx34otGDuSF5sD9R8g0Gü3r8",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//         path: "/",
+//         secure: true,
+//         //domain: ".herokuapp.com", REMOVE THIS HELPED ME (I dont use a domain anymore)
+//         httpOnly: true
+//     }
+// }));
 
-app.listen(process.env.PORT || 5000, () => console.log('server is running'));
+app.listen(process.env.PORT || 3000, () => console.log('server is running on'+process.env.PORT));

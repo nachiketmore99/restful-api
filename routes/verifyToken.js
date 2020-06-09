@@ -27,6 +27,6 @@ module.exports = async function auth(req, res, next){
         next();
         
     }catch(err){
-        res.status(400).send('Invalid Token')
+        res.redirect('https://login-pair-programming.herokuapp.com/user/login')
     }
 }
