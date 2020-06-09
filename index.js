@@ -28,8 +28,8 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.use(cors())
-app.options('*', cors()) // include before other routes
+// app.use(cors())
+// app.options('*', cors()) // include before other routes
 
 
 
