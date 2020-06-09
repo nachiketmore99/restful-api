@@ -17,16 +17,16 @@ require("dotenv").config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-// app.use(function(req, res, next) {
-//     var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'http://localhost:8080/' , 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
-//     var origin = req.headers.origin;
-//     if(allowedOrigins.indexOf(origin) > -1){
-//          res.setHeader('Access-Control-Allow-Origin', origin);
-//     }
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
-//     res.header("Access-Control-Allow-Credentials", "true")
-//     next();
-//   });
+app.use(function(req, res, next) {
+    var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'https://login-pair-programming.herokuapp.com' , 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
+    res.header("Access-Control-Allow-Credentials", "true")
+    next();
+  });
 
 app.use(cors())
 app.options('*', cors()) // include before other routes
