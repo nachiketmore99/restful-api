@@ -76,7 +76,7 @@ router.post('/login', async (req, res) => {
     res.cookie('auth_token', token)
 
     var data = encodeURIComponent(req.body.username+'/'+user.email+'/'+token);
-    res.redirect('https://nachiketmore99.github.io/pair-programming-react/?user='+data)
+    res.redirect('https://app-pair-programming.herokuapp.com/?user='+data)
 
     // res.header('auth-token', token).redirect('http://localhost:8080/');
     console.log('logged in successfully!');

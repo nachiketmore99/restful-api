@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 app.use(function(req, res, next) {
-    var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'https://nachiketmore99.github.io/pair-programming-react' , 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
+    var allowedOrigins = ['https://app-pair-programming.herokuapp.com', 'https://api-pair-programming.herokuapp.com', 'https://code-pair-programming.herokuapp.com'];
     var origin = req.headers.origin;
     if(allowedOrigins.indexOf(origin) > -1){
          res.setHeader('Access-Control-Allow-Origin', origin);
